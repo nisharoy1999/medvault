@@ -1,7 +1,6 @@
 import os
 from flask import Flask, render_template_string, request, jsonify, session, redirect
-import psycopg2
-import psycopg2.extras
+import psycopg
 from datetime import datetime
 
 app = Flask(__name__)
@@ -10,7 +9,7 @@ app.secret_key = os.environ.get("SECRET_KEY", "medvault-secret-2024")
 ACCESS_PASSWORD = os.environ.get("ACCESS_PASSWORD", "medvault123")
 
 def get_db():
-    conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode="require")
+    conn = psycopg.connect(os.environ["DATABASE_URL"], sslmode="require")
     return conn
 
 def init_db():
